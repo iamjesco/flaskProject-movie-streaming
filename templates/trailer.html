@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		{% for movie in movies %}
+			<div class="col-md-6">
+				<iframe width="560" height="100%"
+			        src="{{ movie.trailer }}"
+			        title="{{ movie.title}}"
+			        frameborder="0"
+			        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+				</iframe>
+			</div>
+			<div class="col-md-6">
+				<div class="card">
+                    <h3 class="card-header">{{ movie.title }}</h3>
+					  <ul class="list-group list-group-flush">
+						  <li class="list-group-item">Starring : Denzel Washington</li>
+					    <li class="list-group-item">Genre : {{ movie.genre }}</li>
+					    <li class="list-group-item">Release Date : 1998</li>
+					    <li class="list-group-item">Rating : 7/10</li>
+					    <li class="list-group-item">IMDB link : Fallen</li>
+					  </ul>
+					  <div class="card-body">
+					    <a href="#" class="btn btn-primary">Watch This Movie!</a>
+					  </div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+
+{% endblock %}
