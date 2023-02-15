@@ -13,4 +13,22 @@ body {
   background: radial-gradient(transparent, #000);
 }
 
+.landing {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.landing-text {
+  color: #ffffff;
+  text-align: center;
+}
+.landing-text h1 {
+  color: #ffffff;
+  font-size: 3rem;
+}
+.landing-text p {
+  font-size: 1.25rem;
+}
+
 /*# sourceMappingURL=styles.css.map */

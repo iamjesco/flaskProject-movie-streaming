@@ -30,7 +30,8 @@ def about():
 def movie():
 	movies = db.fetch_all_movies()
 	if movies:
-		return render_template('movie.html', movies=movies)
+		featured_movie = [a_movie for a_movie in movies][0]
+		return render_template('movie.html', featured_movie=featured_movie)
 	else:
 		return render_template('nomovie.html')
 

@@ -2,26 +2,24 @@
 
 {% block content %}
 	<div class="container text-center my-5">
-		<h1 class="text-light">Movie of the week</h1>
+		<h1 class="text-light">{{ featured_movie.title }} - {{ featured_movie.released }}</h1>
 	</div>
 	<div class="container my-5 d-flex justify-content-center">
-	{% for movie in movies %}
 		<video
-		    id="{{ movie.title }}"
+		    id="{{ featured_movie.title }}"
 		    class="video-js"
 	       width="970"
             height="400"
 		    controls
 		    preload="auto"
 		    data-setup="{}">
-		    <source src="{{ movie.filepath }}" type="video/mp4" />
+		    <source src="{{ featured_movie.filepath }}" type="video/mp4" />
 		    <p class="vjs-no-js">
 		      To view this video please enable JavaScript, and consider upgrading to a
 		      web browser that
 		      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 		    </p>
 		  </video>
-	{% endfor %}
 	</div>
 
 {% endblock %}

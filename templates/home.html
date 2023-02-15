@@ -2,11 +2,14 @@
 
 {% block content %}
 
-	<div class="container my-5 py-5 text-center">
-		<h1 class="text-light">Welcome!</h1>
-		<p class="text-light">
-
-		</p>
-	</div>
+	<section class="landing">
+		<article class="landing-text">
+			<h1>Welcome!</h1>
+			<p>
+				Let's enjoy some good, great and even mediocre movies together!
+			</p>
+			<a href="{{ url_for('trailer') }}" class="btn btn-success">Let's GO!</a>
+		</article>
+	</section>
 
 {% endblock %}
