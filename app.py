@@ -13,11 +13,17 @@ app.config['UPLOAD_FOLDER'] = 'static/media'
 
 @app.route('/')
 def home():
-	movies = db.fetch_all_movies()
-	if movies:
-		return render_template('trailer.html', movies=movies)
-	else:
-		return render_template('nomovie.html')
+	return redirect(url_for('alpha'))
+
+
+@app.route('/alpha/')
+def alpha():
+	return render_template('home.html')
+
+
+@app.route('/about/')
+def about():
+	return render_template('about.html')
 
 
 @app.route('/movie/')
@@ -33,7 +39,10 @@ def movie():
 @app.route('/trailer/')
 def trailer():
 	movies = db.fetch_all_movies()
-	return render_template('trailer.html', movies=movies)
+	if movies:
+		return render_template('trailer.html', movies=movies)
+	else:
+		return render_template('nomovie.html')
 
 
 # ====================================================================
