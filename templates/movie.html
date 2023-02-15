@@ -1,6 +1,9 @@
 {% extends 'index.html' %}
 
 {% block content %}
+	<div class="container text-center my-5">
+		<h1 class="text-light">Movie of the week</h1>
+	</div>
 	<div class="container my-5 d-flex justify-content-center">
 		<video
 		    id="{{ movie.title }}"
@@ -18,7 +21,5 @@
 		    </p>
 		  </video>
 	</div>
-	<div class="container">
-		<a href="{{ url_for('delete', id=movie.id) }}" class="btn btn-danger">Delete</a>
-	</div>
+
 {% endblock %}

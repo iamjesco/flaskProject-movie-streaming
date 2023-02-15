@@ -1,22 +1,21 @@
 {% extends 'index.html' %}
 
 {% block content %}
-	<div class="container">
-		{% with messages = get_flashed_messages(with_categories=true) %}
-		  {% if messages %}
-		    {% for category, message in messages %}
-		      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-		        <span>{{ message }}</span>
-					  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-					</div>
-		    {% endfor %}
-		  {% endif %}
-		{% endwith %}
-	</div>
-	<section class="container">
+	<section class="container my-5">
 		<div class="row">
 			<div class="col-md-3"></div>
 			<div class="col-md-6">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+				  {% if messages %}
+				    {% for category, message in messages %}
+				      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+				        <span>{{ message }}</span>
+							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+				    {% endfor %}
+				  {% endif %}
+				{% endwith %}
+
 				<form method="post" novalidate enctype="multipart/form-data">
 			        {{ form.hidden_tag() }}
 					<h4 class="form-title">Add Movie</h4>
@@ -42,7 +41,24 @@
 			      </div>
 			    </form>
 			</div>
-			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				{% if movie %}
+					<div class="card mb-3">
+                        <h5 class="card-header">{{ movie.title }}</h5>
+						<img src="{{ movie.thumbnail }}" alt="" class="img-fluid">
+					  <div class="card-body">
+					    <a href="{{ url_for('delete', id=movie.id) }}" class="btn btn-danger">Delete Movie</a>
+					  </div>
+					</div>
+				{% else %}
+					<h5 class="text-light">No movies available</h5>
+				{% endif %}
+			</div>
 		</div>
 	</section>
+{% endblock %}
+{% block scripts %}
+	<script>
+	socket.disconnect()
+	</script>
 {% endblock %}

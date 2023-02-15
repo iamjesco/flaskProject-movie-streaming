@@ -3,6 +3,9 @@
 {% block content %}
 
 <div class="container">
+	<div class="container text-center my-5">
+		<h1 class="text-light">Movie of the week</h1>
+	</div>
 	<div class="row">
 		{% for movie in movies %}
 			<div class="col-md-6">
@@ -20,8 +23,11 @@
 						  <li class="list-group-item">Starring : {{ movie.starring}}</li>
 					    <li class="list-group-item">Genre : {{ movie.genre }}</li>
 					    <li class="list-group-item">Released : {{ movie.released }}</li>
-					    <li class="list-group-item">Rating : 7/10</li>
-					    <li class="list-group-item">IMDB link : Fallen</li>
+					    <li class="list-group-item">
+						    <a class="text-warning" href="https://www.imdb.com/title/tt0119099/?ref_=nv_sr_srsg_0" target="_blank">
+							    <img src="{{ url_for('static', filename='images/imdb-logo.png') }}" height="20" alt="">
+						    </a>
+					    </li>
 					  </ul>
 					  <div class="card-body">
 					  <a class="btn btn-primary" href="{{ url_for('movie', slug=movie.slug) }}">Watch This Movie!</a>

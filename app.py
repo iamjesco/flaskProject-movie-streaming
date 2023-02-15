@@ -4,6 +4,7 @@ from database.models import Movie
 from forms.all_forms import MovieForm
 import os
 from werkzeug.utils import secure_filename
+import socket
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'wgswrg4623tgsgw4'
@@ -13,14 +14,20 @@ app.config['UPLOAD_FOLDER'] = 'static/media'
 @app.route('/')
 def home():
 	movies = db.fetch_all_movies()
-	return render_template('trailer.html', movies=movies)
+	if movies:
+		return render_template('trailer.html', movies=movies)
+	else:
+		return render_template('nomovie.html')
 
 
 @app.route('/movie/')
 def movie():
 	movies = db.fetch_all_movies()
-	movie = [a_movie for a_movie in movies][0]
-	return render_template('movie.html', movie=movie)
+	if movies:
+		movie = [a_movie for a_movie in movies][0]
+		return render_template('movie.html', movie=movie)
+	else:
+		return render_template('nomovie.html')
 
 
 @app.route('/trailer/')
@@ -36,6 +43,7 @@ def trailer():
 @app.route('/dashboard/', methods=['GET', 'POST'])
 def dashboard():
 	form = MovieForm()
+	movies = db.fetch_all_movies()
 	if form.validate_on_submit():
 		filename = secure_filename(form.upload.data.filename)
 		form.upload.data.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -43,12 +51,16 @@ def dashboard():
 			title=form.title.data,
 			genre=form.genre.data,
 			trailer=form.trailer.data,
+			thumbnail=form.thumbnail.data,
 			starring=form.starring.data,
 			released=form.released.data,
 			filename=filename,)
 		db.add_movie(payload.create_json())
 		flash('Movie uploaded successfully', 'success')
 		return redirect(url_for('dashboard'))
+	if movies:
+		movie = [a_movie for a_movie in movies][0]
+		return render_template('dashboard.html', form=form, movie=movie)
 	return render_template('dashboard.html', form=form)
 
 
