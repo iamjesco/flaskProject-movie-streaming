@@ -48,9 +48,10 @@ class Database:
 
 # print(data.json())
 
-# data = Database.fetch_one_post(6311844)
+# data = Database.fetch_movie(7319599)
 #
-# print(data['id'])
+# print(data)
+# print(data['filename'])
 
 
 # Database.update_post(8241940, 'Willy Wonka', 'mi kas tambe')

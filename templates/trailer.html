@@ -17,14 +17,14 @@
 				<div class="card">
                     <h3 class="card-header">{{ movie.title }}</h3>
 					  <ul class="list-group list-group-flush">
-						  <li class="list-group-item">Starring : Denzel Washington</li>
+						  <li class="list-group-item">Starring : {{ movie.starring}}</li>
 					    <li class="list-group-item">Genre : {{ movie.genre }}</li>
-					    <li class="list-group-item">Release Date : 1998</li>
+					    <li class="list-group-item">Released : {{ movie.released }}</li>
 					    <li class="list-group-item">Rating : 7/10</li>
 					    <li class="list-group-item">IMDB link : Fallen</li>
 					  </ul>
 					  <div class="card-body">
-					    <a href="#" class="btn btn-primary">Watch This Movie!</a>
+					  <a class="btn btn-primary" href="{{ url_for('movie', slug=movie.slug) }}">Watch This Movie!</a>
 					  </div>
 				</div>
 			</div>

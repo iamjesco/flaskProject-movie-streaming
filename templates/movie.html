@@ -1,10 +1,24 @@
 {% extends 'index.html' %}
 
 {% block content %}
-	<div class="container my-5">
-		<video width="100%" controls poster="{{ url_for('static', filename='images/devil.jpg') }}">
-		  <source src="{{ url_for('static', filename='media/the-abyss.mp4') }}" type="video/mp4">
-		Your browser does not support the video tag.
-		</video>
+	<div class="container my-5 d-flex justify-content-center">
+		<video
+		    id="{{ movie.title }}"
+		    class="video-js"
+	       width="970"
+            height="400"
+		    controls
+		    preload="auto"
+		    data-setup="{}">
+		    <source src="../static/media/{{ movie.filename }}" type="video/mp4" />
+		    <p class="vjs-no-js">
+		      To view this video please enable JavaScript, and consider upgrading to a
+		      web browser that
+		      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+		    </p>
+		  </video>
+	</div>
+	<div class="container">
+		<a href="{{ url_for('delete', id=movie.id) }}" class="btn btn-danger">Delete</a>
 	</div>
 {% endblock %}
