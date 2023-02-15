@@ -10,4 +10,4 @@ class MovieForm(FlaskForm):
 	trailer = StringField('Trailer', validators=[DataRequired(message='Please the fuckin trailer...')])
 	starring = StringField('Starring', validators=[DataRequired(message='Please the fuckin trailer...')])
 	released = StringField('Released', validators=[DataRequired(message='Please the fuckin trailer...')])
-	upload = FileField('Upload', validators=[FileRequired()])
+	upload = FileField('Upload Movie', validators=[FileRequired()])
