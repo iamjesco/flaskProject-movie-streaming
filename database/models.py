@@ -5,7 +5,7 @@ import re
 
 
 class Movie:
-	def __init__(self, title, genre, starring, released, trailer, thumbnail, filename, author='IamJesco'):
+	def __init__(self, title, genre, starring, released, trailer, thumbnail, filepath, author='IamJesco'):
 		self.id = random.randint(1000000, 10000000)
 		self.title = title
 		self.slug = re.sub('[ ]', '-', self.title.lower())
@@ -14,7 +14,7 @@ class Movie:
 		self.released = released
 		self.trailer = trailer
 		self.thumbnail = thumbnail
-		self.filename = filename
+		self.filepath = filepath
 		self.author = author
 		self.published = datetime.utcnow()
 
@@ -28,7 +28,7 @@ class Movie:
 			'released': self.released,
 			'trailer': self.trailer,
 			'thumbnail': self.thumbnail,
-			'filename': self.filename,
+			'filepath': self.filepath,
 			'author': self.author,
 			'published': self.published
 		}

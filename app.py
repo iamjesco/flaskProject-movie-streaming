@@ -21,12 +21,12 @@ def alpha():
 	return render_template('home.html')
 
 
-@app.route('/about/')
+@app.route('/alpha/about/')
 def about():
 	return render_template('about.html')
 
 
-@app.route('/movie/')
+@app.route('/alpha/movie/')
 def movie():
 	movies = db.fetch_all_movies()
 	if movies:
@@ -36,7 +36,7 @@ def movie():
 		return render_template('nomovie.html')
 
 
-@app.route('/trailer/')
+@app.route('/alpha/trailer/')
 def trailer():
 	movies = db.fetch_all_movies()
 	if movies:
@@ -54,8 +54,6 @@ def dashboard():
 	form = MovieForm()
 	movies = db.fetch_all_movies()
 	if form.validate_on_submit():
-		filename = secure_filename(form.upload.data.filename)
-		form.upload.data.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		payload = Movie(
 			title=form.title.data,
 			genre=form.genre.data,
@@ -63,7 +61,7 @@ def dashboard():
 			thumbnail=form.thumbnail.data,
 			starring=form.starring.data,
 			released=form.released.data,
-			filename=filename,)
+			filepath=form.filepath.data,)
 		db.add_movie(payload.create_json())
 		flash('Movie uploaded successfully', 'success')
 		return redirect(url_for('dashboard'))
