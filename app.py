@@ -3,12 +3,12 @@ from database.dbase import Database as db
 from database.models import Movie
 from forms.all_forms import MovieForm
 import os
-from werkzeug.utils import secure_filename
-import socket
+import boto3
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'wgswrg4623tgsgw4'
 app.config['UPLOAD_FOLDER'] = 'static/media'
+BUCKET = "jescoflix"
 
 
 @app.route('/')
@@ -30,8 +30,7 @@ def about():
 def movie():
 	movies = db.fetch_all_movies()
 	if movies:
-		movie = [a_movie for a_movie in movies][0]
-		return render_template('movie.html', movie=movie)
+		return render_template('movie.html', movies=movies)
 	else:
 		return render_template('nomovie.html')
 
