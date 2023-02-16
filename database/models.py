@@ -32,3 +32,21 @@ class Movie:
 			'author': self.author,
 			'published': self.published
 		}
+
+
+class User:
+	def __init__(self, username, email, password):
+		self.id = random.randint(1000000, 10000000)
+		self.username = username
+		self.email = email
+		self.password = password
+		self.created = datetime.utcnow()
+
+	def json(self):
+		return {
+			'id': self.id,
+			'username': self.username,
+			'email': self.email,
+			'password': self.password,
+			'created': self.created
+		}

@@ -1,0 +1,73 @@
+
+//  ===================================================
+//      FONT & COLORS
+//  ===================================================
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Limelight&display=swap')
+
+h1, h2, h3, h4, h5, h6
+	font-family: Limelight, sans-serif
+
+p
+	font-family: Garamond, serif
+
+$orange: #A43820
+$light-orange: #BA5536
+$brown: #46211A
+$light-brown: #693D3D
+$dark-gray: #222222
+$mid-gray: #444444
+$light-gray: #CCCCCC
+
+
+//  ===================================================
+//      MEDIA QUERIES
+//  ===================================================
+
+@mixin bp-small
+	@media only screen and (max-width: 50em)
+		@content
+		
+
+//  ===================================================
+//      COMPONENTS
+//  ===================================================
+
+.btn
+	padding: 1rem 3rem
+	font: normal 1.25rem Garamond
+	color: $light-gray
+	transition: .3s ease-in-out
+	border-radius: 10px
+	cursor: pointer
+
+	
+.btn-signin
+	border: 1px solid $light-orange
+	background-color: $orange
+	&:hover
+		background-color: $light-orange
+		color: #ffffff
+
+		
+.btn-register
+	background-color: $dark-gray
+	border: 1px solid $mid-gray
+	&:hover
+		background-color: $light-orange
+		border: 1px solid $light-orange
+		color: #ffffff
+
+
+
+
+
+
+
+
+
+
+
+
+
+

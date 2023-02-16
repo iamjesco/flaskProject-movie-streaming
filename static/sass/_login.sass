@@ -1,0 +1,54 @@
+
+.login
+	position: relative
+	top: 0
+	width: 100%
+	height: 100vh
+	display: grid
+	grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr))
+
+	&-left
+		position: relative
+		display: flex
+		justify-content: center
+		align-items: center
+		height: 100vh
+		padding: 0 2rem
+		&-bg
+			position: absolute
+			width: 100%
+			height: 100%
+			object-fit: fill
+			z-index: -1
+		
+	&-right
+		background-color: $dark-gray
+		height: 100vh
+		display: flex
+		flex-direction: column
+		justify-content: center
+		align-items: center
+		gap: 2rem
+		padding: 0 2rem
+
+	&-text
+		margin: 0 auto
+		color: #ffffff
+		display: flex
+		flex-direction: column
+		gap: 2rem
+		text-align: center
+	&-title
+		font-size: 4rem
+		+bp-small
+			font-size: 3rem
+	&-quote
+		font-size: 1.5rem
+		+bp-small
+			font-size: 1.25rem
+
+
+
+
+
+

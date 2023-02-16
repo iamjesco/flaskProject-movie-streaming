@@ -1,0 +1,80 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+	<section class="login">
+		<section class="login-left">
+			<img class="login-left-bg" src="{{ url_for('static', filename='images/bars-bg.png') }}" alt="">
+			<article class="login-text">
+				<h1 class="login-title">
+					JESCOFLIX
+				</h1>
+				<p class="login-quote">
+					“May the force be with you”
+				</p>
+			</article>
+		</section>
+		<section class="login-right">
+
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				  {% if messages %}
+				    {% for category, message in messages %}
+				      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+				        <span>{{ message }}</span>
+							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+							</div>
+				    {% endfor %}
+				  {% endif %}
+				{% endwith %}
+
+{#				<form class="forms" method="post" novalidate>#}
+				<form class="forms" novalidate>
+			        {{ form.hidden_tag() }}
+					{% for field in form if field.widget.input_type != 'hidden' %}
+						<div class="forms-group">
+							{{ field.label(class='forms-label text-light mt-3') }}
+							{% if field.errors %}
+								{{ field(class='forms-input is-invalid') }}
+								<div class="invalid-feedback">
+									{% for error in field.errors %}
+										<small>
+											{{ error }}
+										</small>
+									{% endfor %}
+								</div>
+							{% else %}
+								{{ field(class='forms-input') }}
+							{% endif %}
+						</div>
+					{% endfor %}
+			          <button type="submit" class="btn btn-signin">Sign in</button>
+			    </form>
+
+				<section class="forms-divider">
+					<hr><p>OR</p><hr>
+				</section>
+
+			<a href="#" class="btn btn-register">Register</a>
+
+		</section>
+	</section>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

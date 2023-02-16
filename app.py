@@ -1,7 +1,9 @@
-from flask import Flask, render_template, flash, redirect, url_for, Response
+from flask import Flask, render_template, flash, redirect, url_for, session, g
+from forms.all_forms import Login, Register
 from database.dbase import Database as db
-from database.models import Movie
+from database.models import Movie, User
 from forms.all_forms import MovieForm
+from flask_bcrypt import Bcrypt
 import os
 import boto3
 
@@ -9,24 +11,29 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'wgswrg4623tgsgw4'
 app.config['UPLOAD_FOLDER'] = 'static/media'
 BUCKET = "jescoflix"
+bcrypt = Bcrypt(app)
+
+
+@app.before_request
+def before_request():
+	all_users = db.fetch_all_users()
+	g.user = None
+	if 'user_id' in session:
+		user = [x for x in all_users if x['id'] == session['user_id']][0]
+		g.user = user
 
 
 @app.route('/')
 def home():
-	return redirect(url_for('alpha'))
-
-
-@app.route('/alpha/')
-def alpha():
 	return render_template('home.html')
 
 
-@app.route('/alpha/about/')
+@app.route('/about/')
 def about():
 	return render_template('about.html')
 
 
-@app.route('/alpha/movie/')
+@app.route('/movie/')
 def movie():
 	movies = db.fetch_all_movies()
 	if movies:
@@ -36,7 +43,7 @@ def movie():
 		return render_template('nomovie.html')
 
 
-@app.route('/alpha/trailer/')
+@app.route('/trailer/')
 def trailer():
 	movies = db.fetch_all_movies()
 	if movies:
@@ -81,6 +88,49 @@ def delete(id):
 	db.delete_movie(id)
 	flash('Movie deleted successfully', 'success')
 	return redirect(url_for('dashboard'))
+
+
+# ====================================================================
+#       DASHBOARD ENDPOINTS
+# ====================================================================
+
+@app.route("/login/", methods=['POST', 'GET'])
+def login():
+    if g.user:
+        return redirect(url_for('home'))
+    form = Login()
+    if form.validate_on_submit():
+        session.pop('user_id', None)
+        email = form.email.data
+        password = form.password.data
+        user = db.fetch_user(email)
+        if user and bcrypt.check_password_hash(user['password'], password):
+            session['user_id'] = user['id']
+            return redirect(url_for('admin'))
+        flash('Please check Email or Password and try again', 'danger')
+        return redirect(url_for('login'))
+    return render_template('login.html', form=form)
+
+
+@app.route('/logout/')
+def logout():
+    session.pop('user_id', None)
+    return redirect(url_for('login'))
+
+
+@app.route("/register/", methods=['POST', 'GET'])
+def register():
+    form = Register()
+    if form.validate_on_submit():
+        user = User(
+            username=form.username.data,
+            email=form.email.data,
+            password=bcrypt.generate_password_hash(form.password.data)
+        )
+        db.create_user(user.json())
+        flash('User created successfully', 'success')
+        return redirect(url_for('register'))
+    return render_template('register.html', form=form)
 
 
 if __name__ == '__main__':

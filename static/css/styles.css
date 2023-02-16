@@ -1,34 +1,221 @@
-body {
-  background: url("../images/main-bg.webp") center/cover fixed no-repeat;
-  position: relative;
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&family=Limelight&display=swap");
+html {
+  -ms-overflow-style: scrollbar;
+  scroll-behavior: smooth;
 }
 
-.overlay {
-  position: fixed;
-  width: 100%;
+html, body {
   height: 100%;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  background: radial-gradient(transparent, #000);
 }
 
-.landing {
-  height: 50vh;
+html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul,
+li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details,
+embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  font-family: sans-serif;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+textarea {
+  overflow: auto;
+  resize: none;
+}
+
+label {
+  display: inline-block;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+svg {
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+a {
+  text-decoration: none;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+main, footer, header, aside, div, section, nav {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: Limelight, sans-serif;
+}
+
+p {
+  font-family: Garamond, serif;
+}
+
+.btn {
+  padding: 1rem 3rem;
+  font: normal 1.25rem Garamond;
+  color: #CCCCCC;
+  transition: 0.3s ease-in-out;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-signin {
+  border: 1px solid #BA5536;
+  background-color: #A43820;
+}
+.btn-signin:hover {
+  background-color: #BA5536;
+  color: #ffffff;
+}
+
+.btn-register {
+  background-color: #222222;
+  border: 1px solid #444444;
+}
+.btn-register:hover {
+  background-color: #BA5536;
+  border: 1px solid #BA5536;
+  color: #ffffff;
+}
+
+.login {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+}
+.login-left {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  padding: 0 2rem;
 }
-.landing-text {
+.login-left-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  z-index: -1;
+}
+.login-right {
+  background-color: #222222;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 2rem;
+}
+.login-text {
+  margin: 0 auto;
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
   text-align: center;
 }
-.landing-text h1 {
-  color: #ffffff;
-  font-size: 3rem;
+.login-title {
+  font-size: 4rem;
 }
-.landing-text p {
-  font-size: 1.25rem;
+@media only screen and (max-width: 50em) {
+  .login-title {
+    font-size: 3rem;
+  }
+}
+.login-quote {
+  font-size: 1.5rem;
+}
+@media only screen and (max-width: 50em) {
+  .login-quote {
+    font-size: 1.25rem;
+  }
+}
+
+.forms {
+  width: 100%;
+  max-width: 300px;
+  font-family: Garamond, serif;
+  font-size: 1.125rem;
+  color: #CCCCCC;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.forms-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.forms-input {
+  font-size: 1.125rem;
+  padding: 1rem;
+  background-color: #222222;
+  color: #CCCCCC;
+  border: 1px solid #444444;
+  border-radius: 10px;
+}
+.forms-input:focus {
+  box-shadow: 0 0 5px 1px #A43820;
+  outline: 1px solid #A43820;
+}
+.forms-divider {
+  display: flex;
+  color: #CCCCCC;
+  gap: 1rem;
+}
+.forms-divider hr {
+  width: 5rem;
+  border-color: #444444;
 }
 
 /*# sourceMappingURL=styles.css.map */
