@@ -1,4 +1,7 @@
 
+body
+	background: url("../images/mainbg.png") center/cover fixed no-repeat
+
 //  ===================================================
 //      FONT & COLORS
 //  ===================================================
@@ -42,7 +45,7 @@ $light-gray: #CCCCCC
 	cursor: pointer
 
 	
-.btn-signin
+.btn-orange
 	border: 1px solid $light-orange
 	background-color: $orange
 	&:hover
@@ -51,21 +54,63 @@ $light-gray: #CCCCCC
 
 		
 .btn-register
-	background-color: $dark-gray
-	border: 1px solid $mid-gray
+	margin-top: 1rem
+	background-color: $orange
+	border: 1px solid $light-orange
 	&:hover
 		background-color: $light-orange
 		border: 1px solid $light-orange
 		color: #ffffff
 
+.pi
+	font-family: Garamond, serif
+	padding: 1rem
+	position: absolute
+	bottom: 0
+	right: 0
+	z-index: 9
+	color: $mid-gray
+	font-size: 2rem
+	cursor: default
+
+.modal
+	position: fixed
+	top: 0
+	left: 0
+	z-index: 99
+	width: 100%
+	height: 100vh
+	background-color: rgba(0, 0, 0, .8)
+	display: none
+
+.page-layout
+	width: 100%
+	height: 100vh
+	display: flex
+	justify-content: center
+	align-items: center
+	flex-direction: column
+	color: #ffffff
+	position: relative
+	
+.page-header
+		position: absolute
+		top: 5rem
+		text-align: center
+		display: flex
+		justify-content: center
+		flex-direction: column
+		gap: 3rem
+		&-text
+			font-size: 2rem
+		&-title
+			font-size: 3rem
 
 
-
-
-
-
-
-
+.video-js
+	border-radius: 10px
+	border: 1px solid $orange
+	box-shadow: 0 0 25px 5px $orange
 
 
 

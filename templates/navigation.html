@@ -1,25 +1,25 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark mb-5">
-  <div class="container">
-    <a class="navbar-brand" href="{{ url_for('home') }}">Jesco<i>Flix</i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarColor02">
-      <ul class="navbar-nav ms-auto">
-	      <li class="nav-item">
-          <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('about') }}">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('trailer') }}">Movie</a>
-        </li>
-{#        <li class="nav-item">#}
-{#          <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>#}
-{#        </li>#}
-      </ul>
-    </div>
-  </div>
+<nav class="navbar">
+	<a href="{{ url_for('login') }}" class="navbar-logo"><h3>JescoFlix</h3></a>
+	<ul class="navbar-list">
+		{% if g.user %}
+			<li>
+				<span class="navbar-name">Welcome, {{ g.user.username | title }}</span>
+			</li>
+		{% endif %}
+		<li>
+			<a class="navbar-item" href="{{ url_for('trailer') }}">Movie Trailer</a>
+		</li>
+		<li>
+			<a class="navbar-item" href="{{ url_for('about') }}">About</a>
+		</li>
+{#		<li>#}
+{#			<a class="navbar-item" href="#">Contact</a>#}
+{#		</li>#}
+		{% if g.user %}
+			<li>
+				<a class="navbar-item" href="{{ url_for('logout') }}">Logout</a>
+			</li>
+		{% endif  %}
+	</ul>
 </nav>

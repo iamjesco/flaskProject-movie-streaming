@@ -1,14 +1,11 @@
 {% extends 'index.html' %}
 
-
 {% block content %}
 	<section class="login">
 		<section class="login-left">
 			<img class="login-left-bg" src="{{ url_for('static', filename='images/bars-bg.png') }}" alt="">
 			<article class="login-text">
-				<h1 class="login-title">
-					JESCOFLIX
-				</h1>
+				<img src="{{ url_for('static', filename='images/logo.svg') }}" alt="JescoFlix logo" class="login-logo">
 				<p class="login-quote">
 					“May the force be with you”
 				</p>
@@ -28,11 +25,11 @@
 				{% endwith %}
 
 {#				<form class="forms" method="post" novalidate>#}
-				<form class="forms" novalidate>
+				<form class="forms" method="post" novalidate>
 			        {{ form.hidden_tag() }}
 					{% for field in form if field.widget.input_type != 'hidden' %}
 						<div class="forms-group">
-							{{ field.label(class='forms-label text-light mt-3') }}
+							{{ field.label(class='forms-label') }}
 							{% if field.errors %}
 								{{ field(class='forms-input is-invalid') }}
 								<div class="invalid-feedback">
@@ -47,15 +44,15 @@
 							{% endif %}
 						</div>
 					{% endfor %}
-			          <button type="submit" class="btn btn-signin">Sign in</button>
+			          <button type="submit" class="btn btn-orange">Sign in</button>
 			    </form>
 
 				<section class="forms-divider">
 					<hr><p>OR</p><hr>
 				</section>
 
-			<a href="#" class="btn btn-register">Register</a>
-
+			<a href="{{ url_for('register') }}" class="btn btn-register">Register</a>
+			<i id="pi" class="pi">π</i>
 		</section>
 	</section>
 

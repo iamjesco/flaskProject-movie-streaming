@@ -1,0 +1,65 @@
+
+.navbar
+	position: fixed
+	z-index: 15
+	top: 0
+	width: 100%
+	background-color: transparent
+	display: flex
+	justify-content: space-between
+	align-items: center
+	padding: 0 1rem
+	
+	&-logo
+		display: inline-block
+		padding: 1rem
+		font-size: 1.25rem
+		color: #ffffff
+		
+	&-list
+		display: flex
+		gap: 2rem
+		
+	&-name
+		display: inline-block
+		position: relative
+		color: $light-gray
+		font-size: .875rem
+		transition: .3s ease-in-out
+		padding: 1rem 0
+		
+	&-item
+		display: inline-block
+		position: relative
+		color: $light-gray
+		font-size: .875rem
+		transition: .3s ease-in-out
+		padding: 1rem 0
+		&::after
+			content: ''
+			height: 2px
+			width: 100%
+			transform: scaleX(0)
+			transform-origin: center
+			background-color: $orange
+			position: absolute
+			left: 0
+			bottom: 0
+			z-index: 0
+			transition: .3s ease-in-out
+		&:hover
+			color: #ffffff
+			&::after
+				transform: scaleX(1)
+
+
+
+
+
+
+
+
+
+
+
+

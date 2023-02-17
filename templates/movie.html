@@ -1,10 +1,11 @@
 {% extends 'index.html' %}
 
 {% block content %}
-	<div class="container text-center my-5">
-		<h1 class="text-light">{{ featured_movie.title }} - {{ featured_movie.released }}</h1>
-	</div>
-	<div class="container my-5 d-flex justify-content-center">
+	<section class="page-layout movie">
+		<section class="page-header">
+			<p class="page-header-text">Featured movie:</p>
+			<h1 class="page-header-title">{{ featured_movie.title }}</h1>
+		</section>
 		<video
 		    id="{{ featured_movie.title }}"
 		    class="video-js"
@@ -20,6 +21,6 @@
 		      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
 		    </p>
 		  </video>
-	</div>
+	</section>
 
 {% endblock %}

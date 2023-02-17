@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+	<section class="page-layout register">
+
+		{% with messages = get_flashed_messages(with_categories=true) %}
+			{% if messages %}
+				{% for category, message in messages %}
+					<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+					<span>{{ message }}</span>
+					  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+
+		<form class="forms" method="post" novalidate>
+			{{ form.hidden_tag() }}
+			<h3 class="forms-title">Register</h3>
+			{% for field in form if field.widget.input_type != 'hidden' %}
+				<div class="forms-group">
+					{{ field.label(class='forms-label') }}
+					{% if field.errors %}
+						{{ field(class='forms-input is-invalid') }}
+						<div class="invalid-feedback text-danger">
+							{% for error in field.errors %}
+								<small>
+									{{ error }}
+								</small>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ field(class='forms-input') }}
+					{% endif %}
+				</div>
+			{% endfor %}
+			<button class="btn btn-register" type="submit">Register</button>
+		</form>
+	</section>
+
+{% endblock %}

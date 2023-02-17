@@ -25,7 +25,10 @@ def before_request():
 
 @app.route('/')
 def home():
-	return redirect(url_for('login'))
+	if not g.user:
+		flash('You need to be logged in to watch', 'danger')
+		return redirect(url_for('login'))
+	return redirect(url_for('movie'))
 
 
 @app.route('/about/')
@@ -35,6 +38,9 @@ def about():
 
 @app.route('/movie/')
 def movie():
+	if not g.user:
+		# flash('You need to be logged in to watch', 'danger')
+		return redirect(url_for('login'))
 	movies = db.fetch_all_movies()
 	if movies:
 		featured_movie = [a_movie for a_movie in movies][0]
@@ -58,6 +64,9 @@ def trailer():
 
 @app.route('/dashboard/', methods=['GET', 'POST'])
 def dashboard():
+	if not g.user:
+		# flash('You need to be logged in to watch', 'danger')
+		return redirect(url_for('login'))
 	form = MovieForm()
 	movies = db.fetch_all_movies()
 	if form.validate_on_submit():
@@ -96,41 +105,40 @@ def delete(id):
 
 @app.route("/login/", methods=['POST', 'GET'])
 def login():
-    if g.user:
-        return redirect(url_for('home'))
-    form = Login()
-    if form.validate_on_submit():
-        session.pop('user_id', None)
-        email = form.email.data
-        password = form.password.data
-        user = db.fetch_user(email)
-        if user and bcrypt.check_password_hash(user['password'], password):
-            session['user_id'] = user['id']
-            return redirect(url_for('admin'))
-        flash('Please check Email or Password and try again', 'danger')
-        return redirect(url_for('login'))
-    return render_template('login.html', form=form)
+	if g.user:
+		return redirect(url_for('home'))
+	form = Login()
+	if form.validate_on_submit():
+		session.pop('user_id', None)
+		email = form.email.data
+		password = form.password.data
+		user = db.fetch_user(email)
+		if user and bcrypt.check_password_hash(user['password'], password):
+			session['user_id'] = user['id']
+			return redirect(url_for('movie'))
+		flash('Please check Email or Password and try again', 'danger')
+		return redirect(url_for('login'))
+	return render_template('login.html', form=form)
 
 
 @app.route('/logout/')
 def logout():
-    session.pop('user_id', None)
-    return redirect(url_for('login'))
+	session.pop('user_id', None)
+	return redirect(url_for('login'))
 
 
 @app.route("/register/", methods=['POST', 'GET'])
 def register():
-    form = Register()
-    if form.validate_on_submit():
-        user = User(
-            username=form.username.data,
-            email=form.email.data,
-            password=bcrypt.generate_password_hash(form.password.data)
-        )
-        db.create_user(user.json())
-        flash('User created successfully', 'success')
-        return redirect(url_for('register'))
-    return render_template('register.html', form=form)
+	form = Register()
+	if form.validate_on_submit():
+		user = User(
+			email=form.email.data,
+			password=bcrypt.generate_password_hash(form.password.data)
+			)
+		db.create_user(user.json())
+		flash('User created successfully', 'success')
+		return redirect(url_for('register'))
+	return render_template('register.html', form=form)
 
 
 if __name__ == '__main__':

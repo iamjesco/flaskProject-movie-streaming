@@ -1,66 +1,62 @@
 {% extends 'index.html' %}
 
 {% block content %}
-	<section class="container my-5">
-		<div class="row">
-			<div class="col-md-6">
-				{% with messages = get_flashed_messages(with_categories=true) %}
-				  {% if messages %}
-				    {% for category, message in messages %}
-				      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-				        <span>{{ message }}</span>
-							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-							</div>
-				    {% endfor %}
-				  {% endif %}
-				{% endwith %}
+	<section class="page-layout dashboard">
+		<section class="page-header">
+			<p class="page-header-text">Add New Movie</p>
+		</section>
 
-				<form method="post" novalidate enctype="multipart/form-data">
-			        {{ form.hidden_tag() }}
-					<h4 class="form-title text-light">Add Movie</h4>
-					{% for field in form if field.widget.input_type != 'hidden' %}
-						<div class="form-group">
-							{{ field.label(class='form-label text-light mt-3') }}
-							{% if field.errors %}
-								{{ field(class='form-control is-invalid') }}
-								<div class="invalid-feedback">
-									{% for error in field.errors %}
-										<small>
-											{{ error }}
-										</small>
-									{% endfor %}
-								</div>
-							{% else %}
-								{{ field(class='form-control') }}
-							{% endif %}
-						</div>
-					{% endfor %}
-			      <div class="py-4">
-			          <button type="submit" class="btn btn-success">Add Movie</button>
-			          <button type="reset" class="btn btn-warning">Clear Form</button>
-			      </div>
-			    </form>
-			</div>
-			<div class="col-md-3">
-			</div>
-			<div class="col-md-3">
-				{% if movie %}
-					<div class="card mb-3">
-                        <h5 class="card-header">Featured Movie</h5>
-						<img src="{{ movie.thumbnail }}" alt="" class="img-fluid">
-					  <div class="card-body">
-					    <a href="{{ url_for('delete', id=movie.id) }}" class="btn btn-danger">Delete Movie</a>
-					  </div>
+		{% with messages = get_flashed_messages(with_categories=true) %}
+		  {% if messages %}
+		    {% for category, message in messages %}
+		      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+		        <span>{{ message }}</span>
+					  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 					</div>
-				{% else %}
-					<h5 class="text-light">No movies available</h5>
-				{% endif %}
-			</div>
-		</div>
+		    {% endfor %}
+		  {% endif %}
+		{% endwith %}
+
+		<form class="forms" method="post" novalidate enctype="multipart/form-data">
+	        {{ form.hidden_tag() }}
+			{% for field in form if field.widget.input_type != 'hidden' %}
+				<div class="forms-group">
+					{{ field.label(class='forms-label') }}
+					{% if field.errors %}
+						{{ field(class='forms-input is-invalid') }}
+						<div class="invalid-feedback">
+							{% for error in field.errors %}
+								<small>
+									{{ error }}
+								</small>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ field(class='forms-input') }}
+					{% endif %}
+				</div>
+			{% endfor %}
+	      <div class="py-4">
+	          <button type="submit" class="btn btn-orange">Add Movie</button>
+	          <button type="reset" class="btn btn-orange">Clear Form</button>
+	      </div>
+	    </form>
+
+{#				{% if movie %}#}
+{#					<div class="card mb-3">#}
+{#                        <h5 class="card-header">Featured Movie</h5>#}
+{#						<img src="{{ movie.thumbnail }}" alt="" class="img-fluid">#}
+{#					  <div class="card-body">#}
+{#					    <a href="{{ url_for('delete', id=movie.id) }}" class="btn btn-danger">Delete Movie</a>#}
+{#					  </div>#}
+{#					</div>#}
+{#				{% else %}#}
+{#					<h5 class="text-light">No movies available</h5>#}
+{#				{% endif %}#}
 	</section>
 {% endblock %}
-{% block scripts %}
-	<script>
-	socket.disconnect()
-	</script>
-{% endblock %}
+{#{% block scripts %}#}
+{#	<script>#}
+{#	socket.disconnect()#}
+{#	</script>#}
+{#{% endblock %}#}
