@@ -26,7 +26,6 @@ def before_request():
 @app.route('/')
 def home():
 	if not g.user:
-		flash('You need to be logged in to watch', 'danger')
 		return redirect(url_for('login'))
 	return redirect(url_for('movie'))
 
