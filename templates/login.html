@@ -5,13 +5,16 @@
 		<section class="login-left">
 			<img class="login-left-bg" src="{{ url_for('static', filename='images/bars-bg.png') }}" alt="">
 			<article class="login-text">
-				<img src="{{ url_for('static', filename='images/logo.svg') }}" alt="JescoFlix logo" class="login-logo">
+{#				<img src="{{ url_for('static', filename='images/logo.svg') }}" alt="JescoFlix logo" class="login-logo">#}
+				<h1 class="login-title">
+					JescoFlix
+				</h1>
 				<p class="login-quote">
 					“May the force be with you”
 				</p>
 			</article>
 		</section>
-		<section class="login-right">
+		<section id="login" class="login-right">
 
 			{% with messages = get_flashed_messages(with_categories=true) %}
 				  {% if messages %}
@@ -24,7 +27,6 @@
 				  {% endif %}
 				{% endwith %}
 
-{#				<form class="forms" method="post" novalidate>#}
 				<form class="forms" method="post" novalidate>
 			        {{ form.hidden_tag() }}
 					{% for field in form if field.widget.input_type != 'hidden' %}

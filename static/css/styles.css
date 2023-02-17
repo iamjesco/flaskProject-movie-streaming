@@ -253,6 +253,7 @@ p {
 .login-left {
   position: relative;
   display: flex;
+  justify-content: center;
   align-items: center;
   height: 100vh;
 }
@@ -283,16 +284,20 @@ p {
   width: 100%;
   padding: 0 1rem;
 }
-.login-text img {
-  max-width: 500px;
-  margin: 0 auto;
+.login-title {
+  font-size: 7vw;
+}
+@media only screen and (max-width: 50em) {
+  .login-title {
+    font-size: 14vw;
+  }
 }
 .login-quote {
-  font-size: 1.5rem;
+  font-size: 2vw;
 }
 @media only screen and (max-width: 50em) {
   .login-quote {
-    font-size: 1.25rem;
+    font-size: 5vw;
   }
 }
 
